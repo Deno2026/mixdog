@@ -204,7 +204,9 @@ function BufferedFrame({
     }
   };
 
-  const frameProps = { title, className, sandbox, referrerPolicy };
+  // `allow` lets a page's own video fullscreen button work; the sandbox still
+  // isolates everything else.
+  const frameProps = { title, className, sandbox, referrerPolicy, allow: 'fullscreen' };
   return (
     <div className="visualize-frame-stack">
       <iframe key={front.id} ref={frontFrame} src={front.src} {...frameProps} />
@@ -543,6 +545,7 @@ function RemotePaneContent({
         title={pane.label}
         sandbox="allow-scripts allow-forms allow-modals"
         referrerPolicy="no-referrer"
+        allow="fullscreen"
       />
     );
   }
